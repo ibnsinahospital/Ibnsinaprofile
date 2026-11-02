@@ -232,18 +232,19 @@
                 background-color: white;
                 padding: 0;
                 gap: 0;
+                display: block;
             }
             .page-wrapper {
-                width: 100%;
+                width: 210mm;
+                height: 297mm;
                 max-width: 100%;
-                height: 297mm; /* Exact A4 height */
                 box-shadow: none;
-                page-break-after: always; /* Forces a new page for each wrapper */
+                page-break-after: always;
                 break-after: page;
                 margin: 0;
                 border: none;
+                display: flex;
             }
-            /* Prevents the browser from cutting elements in half */
             .page-content, .dept-full-block, .support-block, .gallery-grid, .interior-grid {
                 page-break-inside: avoid;
                 break-inside: avoid;
