@@ -227,6 +227,29 @@
             .interior-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 1fr); }
             .interior-item.wide { grid-column: span 1; }
         }
+                /* --- FIX FOR PRINTING TO PDF --- */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                gap: 0;
+            }
+            .page-wrapper {
+                width: 100%;
+                max-width: 100%;
+                height: 297mm; /* Exact A4 height */
+                box-shadow: none;
+                page-break-after: always; /* Forces a new page for each wrapper */
+                break-after: page;
+                margin: 0;
+                border: none;
+            }
+            /* This prevents the browser from cutting elements in half */
+            .page-content, .dept-full-block, .support-block, .gallery-grid, .interior-grid {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body>
