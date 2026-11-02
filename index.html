@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibn Sina Hospital - Institutional Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest-green: #1A3C34;
+            --warm-ivory: #FDFBF7;
+            --gold: #C5A059;
+            --text-dark: #2C3E38;
+            --text-light: #666;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #d1d5db; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            font-family: 'Montserrat', sans-serif;
+            gap: 40px;
+        }
+
+        /* --- SMART SCALING FOR SCREENSHOTS --- */
+        .page-wrapper {
+            width: 95vw;
+            max-width: 850px; 
+            aspect-ratio: 1 / 1.414; /* A4 Ratio */
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background-color: var(--warm-ivory);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        /* --- DECORATIVE BORDERS --- */
+        .top-border { width: 100%; height: 12px; background-color: var(--forest-green); border-bottom: 2px solid var(--gold); flex-shrink: 0; }
+        .footer-bar { width: 100%; height: 35px; background-color: var(--forest-green); border-top: 2px solid var(--gold); display: flex; justify-content: center; align-items: center; margin-top: auto; flex-shrink: 0; z-index: 2; }
+        .footer-text { color: var(--gold); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
+
+        /* --- SHARED PAGE CONTENT --- */
+        .page-content { padding: 6% 8%; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .page-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--forest-green); text-align: center; margin-bottom: 1%; line-height: 1.2; }
+        .page-subtitle { font-size: 0.95rem; color: var(--gold); text-align: center; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3%; font-weight: 500; }
+        .divider { width: 60px; height: 2px; background-color: var(--gold); margin: 0 auto 5% auto; flex-shrink: 0; }
+        
+        /* --- PAGE 1: COVER --- */
+        .cover-content { justify-content: center; align-items: center; text-align: center; }
+        .cover-title { font-family: 'Playfair Display', serif; font-size: 3.8rem; color: var(--forest-green); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1%; line-height: 1.1; }
+        .cover-subtitle { font-size: 1.1rem; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; font-weight: 600; margin-bottom: 5%; }
+        .cover-photo { width: 85%; height: 42%; border: 4px solid var(--gold); margin-bottom: 5%; background-color: #e5e5e5; display: flex; justify-content: center; align-items: center; color: #888; font-size: 0.95rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); overflow: hidden; flex-shrink: 0; }
+        .cover-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cover-contact { font-size: 0.95rem; color: var(--text-dark); letter-spacing: 1px; text-transform: uppercase; line-height: 1.8; }
+        .cover-website { font-size: 1rem; color: var(--forest-green); font-weight: 700; margin-top: 10px; }
+
+        /* --- PAGE 2: ABOUT --- */
+        .about-text { font-size: 1rem; line-height: 1.8; color: var(--text-dark); text-align: justify; margin-bottom: 4%; }
+        .quote-box { background-color: var(--forest-green); color: var(--warm-ivory); padding: 5%; text-align: center; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; border-left: 5px solid var(--gold); margin-top: auto; margin-bottom: 2%; flex-shrink: 0; }
+
+        /* --- PAGE 3: AT A GLANCE --- */
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; flex-grow: 1; align-content: space-evenly; }
+        .grid-item { background: #fff; border: 1px solid #eee; padding: 18px 20px; border-left: 4px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.02); display: flex; flex-direction: column; justify-content: center; }
+        .grid-label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .grid-value { font-size: 1.15rem; color: var(--forest-green); font-weight: 700; }
+
+        /* --- PAGE 4: LEADERSHIP --- */
+        .leader-card { display: flex; align-items: center; background: #fff; padding: 18px 20px; margin-bottom: 15px; border-left: 4px solid var(--forest-green); box-shadow: 0 4px 10px rgba(0,0,0,0.02); flex-shrink: 0; }
+        .leader-info h4 { font-size: 1.1rem; color: var(--forest-green); margin-bottom: 4px; font-weight: 700; }
+        .leader-info p { font-size: 0.85rem; color: var(--text-light); line-height: 1.4; }
+
+        /* --- PAGE 5: MS MESSAGE --- */
+        .message-layout { display: flex; gap: 30px; flex-grow: 1; align-items: flex-start; }
+        .ms-photo { flex: 0 0 160px; height: 200px; border: 3px solid var(--gold); background-color: #e5e5e5; display: flex; justify-content: center; align-items: center; color: #888; font-size: 0.85rem; text-align: center; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; flex-shrink: 0; }
+        .ms-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ms-text { flex: 1; display: flex; flex-direction: column; }
+        .ms-text p { font-size: 0.95rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 15px; text-align: justify; }
+        .ms-signature { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--gold); width: 100%; flex-shrink: 0; }
+        .ms-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--forest-green); font-weight: 700; }
+        .ms-title { font-size: 0.85rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+        /* --- PAGES 6 & 7: DOCTOR DIRECTORY --- */
+        .directory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3% 8%; width: 100%; height: 100%; align-content: space-between; }
+        .department-block { margin-bottom: 20px; }
+        .department-name { font-size: 1rem; font-weight: 700; color: var(--forest-green); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--gold); padding-bottom: 5px; margin-bottom: 8px; }
+        .doctor-list { list-style: none; padding: 0; margin: 0; }
+        .doctor-list li { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 5px; line-height: 1.4; }
+
+        /* --- PAGES 8-10: CLINICAL DEPARTMENTS --- */
+        .dept-full-block { margin-bottom: 15px; border-left: 4px solid var(--gold); background: #fff; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .dept-full-block h3 { font-size: 1.2rem; color: var(--forest-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; }
+        .dept-full-block p { font-size: 0.9rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 10px; }
+        .dept-doctors { font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+        .dept-doctors strong { color: var(--forest-green); }
+
+        /* --- PAGE 11: SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; height: 100%; align-content: space-evenly; }
+        .service-card { background-color: #fff; border-left: 4px solid var(--gold); padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: center; }
+        .service-title { font-size: 0.95rem; font-weight: 700; color: var(--forest-green); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .service-desc { font-size: 0.8rem; color: var(--text-light); line-height: 1.4; }
+
+        /* --- PAGE 12: PM-JAY --- */
+        .intro-text { font-size: 0.95rem; color: var(--text-dark); text-align: center; line-height: 1.6; margin-bottom: 4%; padding: 0 2%; }
+        .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 5%; }
+        .benefit-card { background-color: #fff; border: 1px solid #eee; border-top: 3px solid var(--gold); padding: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .benefit-value { font-size: 1.3rem; font-weight: 700; color: var(--forest-green); margin-bottom: 3px; }
+        .benefit-label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
+        .process-title { font-size: 1rem; font-weight: 700; color: var(--forest-green); margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 5px; }
+        .process-list { list-style: none; padding: 0; }
+        .process-list li { font-size: 0.85rem; color: var(--text-dark); line-height: 1.5; margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .process-list li::before { content: "■"; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 3px; }
+        .note-box { background-color: var(--forest-green); color: var(--warm-ivory); padding: 15px; text-align: center; font-size: 0.85rem; border-left: 5px solid var(--gold); margin-top: auto; margin-bottom: 1%; font-weight: 500; flex-shrink: 0; }
+
+        /* --- PAGE 13: INSURANCE --- */
+        .support-block { background: #fff; padding: 20px; border-left: 5px solid var(--gold); margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); flex-shrink: 0; }
+        .support-block h3 { font-size: 1.1rem; color: var(--forest-green); text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
+        .support-block p { font-size: 0.9rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 10px; }
+        .info-list { list-style: none; margin-top: 10px; }
+        .info-list li { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 8px; padding-left: 20px; position: relative; }
+        .info-list li::before { content: "■"; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 3px; }
+        .highlight-box { background: var(--forest-green); color: var(--warm-ivory); padding: 15px; border-left: 5px solid var(--gold); text-align: center; font-size: 0.9rem; margin-top: auto; flex-shrink: 0; }
+        .highlight-box strong { color: var(--gold); }
+
+        /* --- PAGE 14: COMMUNITY --- */
+        .community-box { background: var(--forest-green); color: var(--warm-ivory); padding: 20px; border-left: 5px solid var(--gold); margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .community-box h3 { color: var(--gold); text-transform: uppercase; margin-bottom: 10px; font-size: 1rem; font-weight: 700; }
+        .community-box p { font-size: 0.9rem; line-height: 1.6; }
+        .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; flex-grow: 1; align-content: start; }
+        .tip-card { background: #fff; padding: 15px; border-top: 3px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .tip-card h4 { font-size: 0.95rem; color: var(--forest-green); margin-bottom: 8px; font-weight: 700; }
+        .tip-card p { font-size: 0.8rem; color: var(--text-light); line-height: 1.5; }
+
+        /* --- PAGE 15: QUALITY & ACCREDITATIONS --- */
+        .accreditation-block { background-color: #fff; border-left: 5px solid var(--gold); padding: 15px 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); flex-shrink: 0; }
+        .accreditation-title { font-size: 1.1rem; font-weight: 700; color: var(--forest-green); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+        .accreditation-desc { font-size: 0.85rem; color: var(--text-dark); line-height: 1.5; }
+        .accreditation-desc strong { color: var(--forest-green); }
+        .note-text { font-size: 0.75rem; color: var(--text-light); margin-top: 8px; font-style: italic; }
+        .certificate-gallery { display: flex; gap: 20px; height: 300px; justify-content: center; margin-top: 10px; margin-bottom: 10px; flex-shrink: 0; }
+        .certificate-frame { width: 250px; height: 100%; border: 3px solid var(--gold); background-color: #f9f9f9; display: flex; justify-content: center; align-items: center; color: #888; font-size: 0.8rem; text-align: center; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .certificate-frame img { width: 100%; height: 100%; object-fit: contain; background: #fff; display: block; }
+
+        /* --- PAGE 16: CONTACT --- */
+        .contact-layout { display: flex; gap: 30px; margin-bottom: 20px; flex-grow: 1; align-items: center; }
+        .contact-details { flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+        .contact-item { margin-bottom: 15px; }
+        .contact-label { font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 5px; }
+        .contact-value { font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; }
+        .contact-value strong { color: var(--forest-green); font-weight: 700; }
+        .map-container { flex: 0 0 50%; height: 300px; border: 4px solid var(--gold); background-color: #e5e5e5; display: flex; justify-content: center; align-items: center; color: #888; font-size: 0.85rem; text-align: center; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden; flex-shrink: 0; }
+        .map-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .timing-box { background-color: var(--forest-green); color: var(--warm-ivory); padding: 15px; text-align: center; border-left: 5px solid var(--gold); display: flex; justify-content: space-around; align-items: center; border-radius: 4px; flex-shrink: 0; }
+        .timing-box p { font-size: 0.85rem; letter-spacing: 1px; font-weight: 500; }
+        .timing-box strong { color: var(--gold); font-size: 0.95rem; text-transform: uppercase; font-weight: 700; }
+
+        /* --- PAGE 17: COLLEGE --- */
+        .college-intro { background: #fff; padding: 20px; border-left: 5px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.03); margin-bottom: 15px; flex-shrink: 0; }
+        .college-intro p { font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; flex-shrink: 0; }
+        .info-card { background: #fff; padding: 15px; border-top: 3px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .info-label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: 600; }
+        .info-value { font-size: 0.95rem; color: var(--forest-green); font-weight: 700; }
+        .courses-title { font-size: 1rem; font-weight: 700; color: var(--forest-green); text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid var(--gold); padding-bottom: 5px; }
+        .courses-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 5px 20px; }
+        .courses-list li { font-size: 0.85rem; color: var(--text-dark); padding: 6px 0; padding-left: 15px; position: relative; }
+        .courses-list li::before { content: "■"; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 10px; }
+        .courses-list li strong { color: var(--forest-green); }
+
+        /* --- PAGE 18: CAMPUS & INFRASTRUCTURE (SATELLITE IMAGE) --- */
+        .campus-layout { display: flex; gap: 25px; flex-grow: 1; align-items: center; }
+        .satellite-frame { flex: 0 0 50%; height: 380px; border: 4px solid var(--gold); background-color: #e5e5e5; display: flex; justify-content: center; align-items: center; color: #888; font-size: 0.85rem; text-align: center; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; flex-shrink: 0; }
+        .satellite-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .campus-text { flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+        .machinery-list { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start; margin-top: 10px; margin-bottom: 15px; }
+        .machine-tag { background: var(--forest-green); color: var(--gold); padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- PAGE 19: FUTURE EXPANSION --- */
+        .future-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; flex-grow: 1; align-content: center; }
+        .future-item { background: #fff; border: 1px solid #eee; padding: 15px; text-align: center; border-top: 3px solid var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .future-title { font-size: 0.85rem; font-weight: 700; color: var(--forest-green); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* --- PAGE 20: HOSPITAL GALLERY (4 Images) --- */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; width: 100%; height: 100%; flex-grow: 1; }
+        .gallery-item { border: 3px solid var(--gold); background-color: #e5e5e5; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* --- PAGE 21: HOSPITAL INTERIORS (5 Images Custom Layout) --- */
+        .interior-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; gap: 12px; width: 100%; height: 100%; flex-grow: 1; padding-bottom: 10px; }
+        .interior-item { border: 3px solid var(--gold); background-color: #e5e5e5; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .interior-item.wide { grid-column: span 2; }
+        .interior-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* --- PAGE 22: BACK COVER --- */
+        .back-cover-content { justify-content: center; align-items: center; text-align: center; background-color: var(--forest-green); flex-grow: 1; margin: -6% -8%; padding: 10% 8%; position: relative; }
+        .inner-border { position: absolute; top: 20px; bottom: 20px; left: 20px; right: 20px; border: 2px solid var(--gold); pointer-events: none; }
+        .back-title { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; position: relative; z-index: 1; }
+        .back-subtitle { font-size: 1rem; color: var(--warm-ivory); letter-spacing: 6px; text-transform: uppercase; margin-bottom: 40px; position: relative; z-index: 1; }
+        .back-divider { width: 80px; height: 2px; background-color: var(--gold); margin: 0 auto 40px auto; position: relative; z-index: 1; }
+        .motto { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--warm-ivory); font-style: italic; line-height: 1.4; margin-bottom: 50px; max-width: 80%; position: relative; z-index: 1; }
+        .back-contact { color: var(--warm-ivory); font-size: 0.95rem; line-height: 1.8; letter-spacing: 1px; position: relative; z-index: 1; }
+        .back-contact strong { color: var(--gold); }
+        .back-website { margin-top: 20px; font-size: 1.1rem; color: var(--gold); font-weight: 600; letter-spacing: 2px; position: relative; z-index: 1; }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 600px) {
+            .page-wrapper { width: 100%; max-width: 100%; }
+            .cover-title { font-size: 2.2rem; }
+            .page-title { font-size: 1.8rem; }
+            .about-text { font-size: 0.9rem; }
+            .directory-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .grid-container { grid-template-columns: 1fr; }
+            .future-grid { grid-template-columns: 1fr 1fr; }
+            .campus-layout { flex-direction: column; }
+            .satellite-frame { width: 100%; height: 250px; flex: none; }
+            .contact-layout { flex-direction: column; }
+            .map-container { width: 100%; height: 250px; flex: none; }
+            .certificate-gallery { flex-direction: column; height: auto; align-items: center; }
+            .certificate-frame { width: 100%; max-width: 300px; height: 350px; }
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 1fr); }
+            .interior-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 1fr); }
+            .interior-item.wide { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: COVER -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content cover-content">
+            <h1 class="cover-title">Ibn Sina Hospital</h1>
+            <p class="cover-subtitle">Institutional Profile 2026</p>
+            <div class="cover-photo">
+                <img src="images/hospital-exterior.jpg" alt="Ibn Sina Hospital Exterior">
+            </div>
+            <div class="cover-contact">
+                Ompora, Budgam, Near Railway Station<br>
+                Jammu & Kashmir 191111
+            </div>
+            <p class="cover-website">www.ibnsinahospital.in</p>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 2: ABOUT US -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">About Us</h2>
+            <p class="page-subtitle">Compassionate Care. Advanced Medicine.</p>
+            <div class="divider"></div>
+            <p class="about-text">Founded in 2018, Ibn Sina Hospital has grown into Budgam's most trusted multi-specialty hospital — a place where comprehensive care meets genuine compassion. As a 100-bed facility spread across a 58-kanal campus, we are equipped to handle a wide spectrum of medical needs.</p>
+            <p class="about-text">We follow a consultant-led care model: experienced specialists oversee treatment plans from diagnosis through recovery, ensuring that every patient receives expert-guided, personalized attention. From preventive check-ups to complex surgeries, our team delivers a seamless healthcare experience under one roof.</p>
+            <p class="about-text">Ibn Sina Hospital is based in Ompora, Budgam, and serves patients from Srinagar, Ganderbal, Pulwama, Shopian, Kulgam, across Jammu & Kashmir, and patients visiting from other parts of India. In addition to the hospital, we have an affiliated nursing college, strengthening our contribution to healthcare education.</p>
+            <div class="quote-box">"High Quality Facilities at Affordable Costs."</div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 3: AT A GLANCE -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Hospital at a Glance</h2>
+            <p class="page-subtitle">Key Institutional Facts</p>
+            <div class="divider"></div>
+            <div class="grid-container">
+                <div class="grid-item"><div class="grid-label">Established</div><div class="grid-value">2018</div></div>
+                <div class="grid-item"><div class="grid-label">Location</div><div class="grid-value">Ompora, Budgam</div></div>
+                <div class="grid-item"><div class="grid-label">Capacity</div><div class="grid-value">100 Beds</div></div>
+                <div class="grid-item"><div class="grid-label">Campus Area</div><div class="grid-value">58 Kanals</div></div>
+                <div class="grid-item"><div class="grid-label">Medical Departments</div><div class="grid-value">19 Departments</div></div>
+                <div class="grid-item"><div class="grid-label">Medical Team</div><div class="grid-value">35 Specialists</div></div>
+                <div class="grid-item"><div class="grid-label">Certification</div><div class="grid-value">NABH Certified*</div></div>
+                <div class="grid-item"><div class="grid-label">Operations</div><div class="grid-value">24/7 Emergency, OPD & Pharmacy</div></div>
+            </div>
+            <p style="font-size: 0.75rem; color: #888; margin-top: auto; text-align: center;">*NABH accreditation status and validity dates should be verified prior to final printing.</p>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 4: LEADERSHIP -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Leadership</h2>
+            <p class="page-subtitle">Guiding Our Hospital</p>
+            <div class="divider"></div>
+            <div class="leader-card">
+                <div class="leader-info"><h4>Dr. Ibrahim Makaya</h4><p>Medical Superintendent<br>Ensures top patient care and hospital administration.</p></div>
+            </div>
+            <div class="leader-card">
+                <div class="leader-info"><h4>Dr. Rashid</h4><p>Deputy Medical Superintendent<br>Oversees clinical departments, staff schedules, patient complaints, and safety.</p></div>
+            </div>
+            <div class="leader-card">
+                <div class="leader-info"><h4>Dr. Bashir Ahmad Bhat</h4><p>Management Head<br>Coordinates departments and ensures smooth workflow.</p></div>
+            </div>
+            <div class="leader-card">
+                <div class="leader-info"><h4>Dr. Ashraf Ahmad Malik</h4><p>Administrative Head<br>Manages admissions, discharges, records, and documentation.</p></div>
+            </div>
+        </div>
+         class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 5: MS MESSAGE -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Message from the MS</h2>
+            <p class="page-subtitle">A Commitment to Excellence</p>
+            <div class="divider"></div>
+            <div class="message-layout">
+                <div class="ms-photo">
+                    <img src="images/ms-dr-ibrahim-makaya.jpg" alt="Dr. Ibrahim Makaya, Medical Superintendent">
+                </div>
+                <div class="ms-text">
+                    <div>
+                        <p>Welcome to Ibn Sina Hospital. Since our founding in 2018, we have strived to create a healthcare institution that the people of Budgam and beyond can trust implicitly. Our journey has been defined by a relentless commitment to clinical excellence, compassion, and accessibility.</p>
+                        <p>We believe that world-class medical care should not be a privilege. That is why we follow a consultant-led care model, supported by advanced diagnostic technology and a dedicated team of 35 specialists across 19 departments. From routine check-ups to complex surgical interventions, our focus remains entirely on the patient.</p>
+                        <p>Whether you are visiting us for a consultation, an emergency, or ongoing treatment, know that our doors are open 24/7, and our team is here to serve you with integrity and care.</p>
+                    </div>
+                    <div class="ms-signature">
+                        <div class="ms-name">Dr. Ibrahim Makaya</div>
+                        <div class="ms-title">Medical Superintendent</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 6: DOCTORS PART 1 -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Our Medical Team</h2>
+            <p class="page-subtitle">Doctor Directory — Part 1</p>
+            <div class="divider"></div>
+            <div class="directory-grid">
+                <div class="col-1">
+                    <div class="department-block"><div class="department-name">Cardiology</div><ul class="doctor-list"><li>Dr. Shahood Kakroo</li><li>Dr. Majid</li></ul></div>
+                    <div class="department-block"><div class="department-name">Dermatology</div><ul class="doctor-list"><li>Dr. Rayees Ah. Mir</li></ul></div>
+                    <div class="department-block"><div class="department-name">Dentistry</div><ul class="doctor-list"><li>Dr. Yaseen Malik</li></ul></div>
+                    <div class="department-block"><div class="department-name">ENT</div><ul class="doctor-list"><li>Dr. Mir Sajad Qadri</li><li>Dr. Omer Shafi</li></ul></div>
+                    <div class="department-block"><div class="department-name">Gastroenterology</div><ul class="doctor-list"><li>Dr. Zaffar Ali Wani</li><li>Dr. Irshad Ahmad Parray</li><li>Dr. Wasim</li></ul></div>
+                </div>
+                <div class="col-2">
+                    <div class="department-block"><div class="department-name">General Medicine</div><ul class="doctor-list"><li>Dr. Aijaz Bhat</li><li>Dr. Saba</li></ul></div>
+                    <div class="department-block"><div class="department-name">General Surgery</div><ul class="doctor-list"><li>Dr. Jaiparam Singh</li><li>Dr. Wasim Raja</li><li>Dr. Mohammad Yousuf Dar</li></ul></div>
+                    <div class="department-block"><div class="department-name">Gynaecology</div><ul class="doctor-list"><li>Dr. Sheikh Naiyer Furkan</li><li>Dr. Mudasir Ahmad</li><li>Dr. Riyaz Tantary</li><li>Dr. Snober Malik</li><li>Dr. Farhat Tabbsum</li><li>Dr. Madhu Sayal</li></ul></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 7: DOCTORS PART 2 -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Our Medical Team</h2>
+            <p class="page-subtitle">Doctor Directory — Part 2</p>
+            <div class="divider"></div>
+            <div class="directory-grid">
+                <div class="col-1">
+                    <div class="department-block"><div class="department-name">Nephrology</div><ul class="doctor-list"><li>Dr. Aijaz Arshid</li></ul></div>
+                    <div class="department-block"><div class="department-name">Ophthalmology</div><ul class="doctor-list"><li>Dr. Rhimsha</li></ul></div>
+                    <div class="department-block"><div class="department-name">Orthopaedics</div><ul class="doctor-list"><li>Dr. Azad Shah</li><li>Dr. Yawar Haider</li><li>Dr. Sukhjeet Singh</li></ul></div>
+                    <div class="department-block"><div class="department-name">Pediatric Surgery</div><ul class="doctor-list"><li>Dr. Mudasir Magray</li></ul></div>
+                    <div class="department-block"><div class="department-name">Physiotherapy</div><ul class="doctor-list"><li>Dr. Mohsin Ali</li><li>Dr. Andleeb</li></ul></div>
+                </div>
+                <div class="col-2">
+                    <div class="department-block"><div class="department-name">Plastic Surgery</div><ul class="doctor-list"><li>Dr. Mushtaq</li></ul></div>
+                    <div class="department-block"><div class="department-name">Pulmonology</div><ul class="doctor-list"><li>Dr. Waseem Ud Din</li></ul></div>
+                    <div class="department-block"><div class="department-name">Radiology</div><ul class="doctor-list"><li>Dr. Ishan Shabir Wani</li></ul></div>
+                    <div class="department-block"><div class="department-name">Rheumatology</div><ul class="doctor-list"><li>Dr. Zubair Ahmad Magray</li></ul></div>
+                    <div class="department-block"><div class="department-name">Urology</div><ul class="doctor-list"><li>Dr. Shabir Mir</li><li>Dr. Shahnawaz Rasool</li><li>Dr. Muzzafar Bashir</li></ul></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 8: DEPARTMENTS 1 -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Clinical Departments</h2>
+            <p class="page-subtitle">Specialized Care Teams</p>
+            <div class="divider"></div>
+            <div class="dept-full-block">
+                <h3>Cardiology</h3>
+                <p>Our Cardiology department is equipped with advanced diagnostic and interventional tools, offering expert care for heart conditions. We specialize in the diagnosis and management of coronary artery disease, heart failure, hypertension, and complex arrhythmias. Our team is dedicated to providing comprehensive heart care with a focus on prevention and long-term wellness.</p>
+                <div class="dept-doctors"><strong>Consultants:</strong> Dr. Shahood Kakroo, Dr. Majid</div>
+            </div>
+            <div class="dept-full-block">
+                <h3>Gastroenterology</h3>
+                <p>We provide comprehensive care for digestive and liver disorders. Our department is equipped to handle everything from routine diagnostic endoscopies and colonoscopies to the management of complex conditions like inflammatory bowel disease, liver cirrhosis, and pancreatic disorders. Our specialists focus on accurate diagnosis and advanced therapeutic interventions.</p>
+                <div class="dept-doctors"><strong>Consultants:</strong> Dr. Zaffar Ali Wani, Dr. Irshad Ahmad Parray, Dr. Wasim</div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 9: DEPARTMENTS 2 -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Clinical Departments</h2>
+            <p class="page-subtitle">Specialized Care Teams</p>
+            <div class="divider"></div>
+            <div class="dept-full-block">
+                <h3>Orthopaedics & Joint Replacement</h3>
+                <p>Our Orthopaedic team provides expert care for bone and joint disorders, sports injuries, and complex trauma. We specialize in advanced joint replacement surgeries, arthroscopy, and minimally invasive procedures. Whether it's a fracture, arthritis management, or a complex spinal condition, our surgeons focus on restoring mobility and improving quality of life.</p>
+                <div class="dept-doctors"><strong>Consultants:</strong> Dr. Azad Shah, Dr. Yawar Haider, Dr. Sukhjeet Singh</div>
+            </div>
+            <div class="dept-full-block">
+                <h3>Urology</h3>
+                <p>Our Urology department offers comprehensive care for conditions affecting the urinary tract and male reproductive system. We specialize in the treatment of kidney stones, prostate enlargement, urinary tract infections, and renal transplants. Our surgeons are experts in endourology, laparoscopic surgery, and andrology, providing minimally invasive solutions for faster recovery.</p>
+                <div class="dept-doctors"><strong>Consultants:</strong> Dr. Shabir Mir, Dr. Shahnawaz Rasool, Dr. Muzzafar Bashir</div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 10: DEPARTMENTS 3 -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Clinical Departments</h2>
+            <p class="page-subtitle">Specialized Care Teams</p>
+            <div class="divider"></div>
+            <div class="dept-full-block">
+                <h3>Gynaecology & Obstetrics</h3>
+                <p>Our Gynaecology department offers comprehensive, compassionate care for women at every stage of life. We specialize in high-risk pregnancy management, prenatal care, advanced minimally invasive gynaecological surgeries, and reproductive health. From routine screenings to complex deliveries, our team ensures the highest standards of safety and personalized care.</p>
+                <div class="dept-doctors"><strong>Consultants:</strong> Dr. Sheikh Naiyer Furkan, Dr. Mudasir Ahmad, Dr. Riyaz Tantary, Dr. Snober Malik, Dr. Farhat Tabbsum, Dr. Madhu Sayal</div>
+            </div>
+            <div class="dept-full-block">
+                <h3>General & Laparoscopic Surgery</h3>
+                <p>Our General Surgery department provides expert surgical care for a wide range of abdominal and systemic conditions. We specialize in advanced laparoscopic (keyhole) surgeries for gallbladder, appendix, and hernia repair. Our team is also highly experienced in emergency trauma care, complex gastrointestinal procedures, and comprehensive surgical management.</p>
+                <div class="dept-doctors"><strong>Consultants:</strong> Dr. Jaiparam Singh, Dr. Wasim Raja, Dr. Mohammad Yousuf Dar</div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 11: SERVICES -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Services & Facilities</h2>
+            <p class="page-subtitle">Comprehensive Care Under One Roof</p>
+            <div class="divider"></div>
+            <div class="services-grid">
+                <div class="service-card"><div class="service-title">24/7 Emergency</div><div class="service-desc">Always open for critical and emergency care.</div></div>
+                <div class="service-card"><div class="service-title">24/7 OPD</div><div class="service-desc">Round-the-clock outpatient consultations.</div></div>
+                <div class="service-card"><div class="service-title">24/7 Pharmacy</div><div class="service-desc">In-house pharmacy, never closed for emergency meds.</div></div>
+                <div class="service-card"><div class="service-title">24/7 Diagnostic Lab</div><div class="service-desc">Round-the-clock lab services with rapid turnaround.</div></div>
+                <div class="service-card"><div class="service-title">Dialysis</div><div class="service-desc">In-house renal care with experienced nephrology support.</div></div>
+                <div class="service-card"><div class="service-title">Endoscopy & Colonoscopy</div><div class="service-desc">Advanced upper and lower GI diagnostic procedures.</div></div>
+                <div class="service-card"><div class="service-title">Digital X-Rays</div><div class="service-desc">High-resolution radiography with same-day results.</div></div>
+                <div class="service-card"><div class="service-title">Vaccinations</div><div class="service-desc">Routine, travel, and seasonal immunizations for all ages.</div></div>
+                <div class="service-card"><div class="service-title">TMT & Holter</div><div class="service-desc">Cardiac stress testing and 24-hour ECG monitoring.</div></div>
+                <div class="service-card"><div class="service-title">ABPM</div><div class="service-desc">24-hour blood pressure monitoring for hypertension.</div></div>
+                <div class="service-card"><div class="service-title">Ultrasonography</div><div class="service-desc">Detailed abdominal, obstetric, and vascular imaging.</div></div>
+                <div class="service-card"><div class="service-title">Ambulance</div><div class="service-desc">Emergency transport to and from the hospital.</div></div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 12: PM-JAY -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">PM-JAY / Ayushman Bharat</h2>
+            <p class="page-subtitle">Cashless Treatment at Ibn Sina Hospital</p>
+            <div class="divider"></div>
+            <p class="intro-text">Ibn Sina Hospital, Budgam is an empanelled hospital under the Ayushman Bharat – Pradhan Mantri Jan Arogya Yojana (PM-JAY). We provide cashless treatment to eligible families across Jammu & Kashmir.</p>
+            <div class="benefits-grid">
+                <div class="benefit-card"><div class="benefit-value">₹5 Lakh</div><div class="benefit-label">Cover per family/year</div></div>
+                <div class="benefit-card"><div class="benefit-value">100%</div><div class="benefit-label">Cashless Treatment</div></div>
+                <div class="benefit-card"><div class="benefit-value">Day 1</div><div class="benefit-label">Pre-existing covered</div></div>
+                <div class="benefit-card"><div class="benefit-value">24/7</div><div class="benefit-label">Emergency Support</div></div>
+            </div>
+            <div class="process-title">How to Avail Cashless Treatment</div>
+            <ul class="process-list">
+                <li><strong>Visit Us:</strong> Walk in or book an appointment.</li>
+                <li><strong>Verify:</strong> Show your PM-JAY e-card or Aadhaar at our Ayushman Mitra desk.</li>
+                <li><strong>Get Treated:</strong> Receive cashless treatment without out-of-pocket expenses.</li>
+                <li><strong>We Handle the Rest:</strong> The hospital settles the claim paperwork with the scheme.</li>
+            </ul>
+            <div class="note-box"><strong>Important:</strong> Always carry your PM-JAY card / e-card and Aadhaar when you visit.</div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 13: INSURANCE -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Insurance & Billing</h2>
+            <p class="page-subtitle">Financial Support & Transparency</p>
+            <div class="divider"></div>
+            <div class="support-block">
+                <h3>Cashless Treatment (PM-JAY)</h3>
+                <p>As an empanelled hospital, we provide 100% cashless treatment to eligible families under the Ayushman Bharat PM-JAY scheme. Our dedicated <strong>Ayushman Mitra desk</strong> is available to assist you with eligibility checks, card verification, and claim processing.</p>
+            </div>
+            <div class="support-block">
+                <h3>General Billing & Insurance</h3>
+                <p>For patients using private health insurance or corporate tie-ups, our billing department provides full support. We ensure transparent pricing and itemized billing for all services.</p>
+                <ul class="info-list">
+                    <li>Dedicated help desk for insurance queries.</li>
+                    <li>Assistance with pre-authorization forms.</li>
+                    <li>Transparent, itemized billing for all treatments.</li>
+                    <li>Flexible payment options (Cash, Card, UPI).</li>
+                </ul>
+            </div>
+            <div class="highlight-box"><strong>Need help with billing?</strong><br>Visit our reception or call us at <strong>9419023501</strong> for assistance.</div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 14: COMMUNITY -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Community & Wellness</h2>
+            <p class="page-subtitle">Beyond the Hospital Walls</p>
+            <div class="divider"></div>
+            <div class="community-box">
+                <h3>Our Commitment to Budgam</h3>
+                <p>At Ibn Sina Hospital, we believe in serving the community beyond our clinical walls. We regularly organize free medical camps, health awareness drives, and vaccination programs across Budgam and surrounding areas. Our goal is to make preventive healthcare accessible to every family.</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card"><h4>Heart Health</h4><p>Monitor your blood pressure regularly. Reduce salt intake, exercise for 30 minutes daily, and avoid smoking to maintain a healthy heart.</p></div>
+                <div class="tip-card"><h4>Nutrition</h4><p>A balanced diet rich in fruits, vegetables, and whole grains boosts immunity. Limit processed foods and sugary drinks.</p></div>
+                <div class="tip-card"><h4>Hydration</h4><p>Drink at least 8 glasses of water daily. Proper hydration is essential for kidney function and overall well-being.</p></div>
+                <div class="tip-card"><h4>Regular Checkups</h4><p>Don't wait for symptoms. Annual health screenings help detect issues early, when they are easiest to treat.</p></div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 15: QUALITY & ACCREDITATIONS -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Quality & Accreditations</h2>
+            <p class="page-subtitle">Recognized for Excellence</p>
+            <div class="divider"></div>
+            <div class="accreditation-block">
+                <div class="accreditation-title">NABH Certified</div>
+                <div class="accreditation-desc">Ibn Sina Hospital holds an <strong>Entry-Level Hospital Certificate</strong> from the National Accreditation Board for Hospitals & Healthcare Providers (NABH).<br><strong>Certificate No:</strong> PEH-2025-2988 | <strong>Validity:</strong> 8 July 2025 to 7 July 2027</div>
+                <div class="note-text">* NABH accreditation status and validity dates should be verified prior to final printing.</div>
+            </div>
+            <div class="accreditation-block">
+                <div class="accreditation-title">PM-JAY / Ayushman Bharat Empanelled</div>
+                <div class="accreditation-desc">We are an empanelled hospital under <strong>PM-JAY</strong>, providing <strong>100% cashless treatment</strong> to eligible families across J&K, covering up to <strong>₹5 Lakh per family per year</strong>.</div>
+            </div>
+            <div class="certificate-gallery">
+                <div class="certificate-frame">
+                    <img src="images/nabh-certificate-1.jpg" alt="NABH Certificate 1">
+                </div>
+                <div class="certificate-frame">
+                    <img src="images/nabh-certificate-2.jpg" alt="NABH Certificate 2">
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 16: CONTACT -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Contact Us</h2>
+            <p class="page-subtitle">Get in Touch / Visit Us</p>
+            <div class="divider"></div>
+            <div class="contact-layout">
+                <div class="contact-details">
+                    <div class="contact-item"><div class="contact-label">Address</div><div class="contact-value"><strong>Ibn Sina Hospital</strong><br>Ompora, Budgam,<br>Near Railway Station<br>Jammu & Kashmir 191111</div></div>
+                    <div class="contact-item"><div class="contact-label">Appointments & Reception</div><div class="contact-value"><strong>9622552553</strong> (Appointments)<br><strong>9419023501</strong> (Reception)</div></div>
+                    <div class="contact-item"><div class="contact-label">Administration</div><div class="contact-value">9622392553 / 9149606115<br>7006272634</div></div>
+                    <div class="contact-item"><div class="contact-label">Website</div><div class="contact-value" style="color: var(--forest-green); font-weight: 700;">www.ibnsinahospital.in</div></div>
+                </div>
+                <div class="map-container">
+                    <img src="images/google-maps-location.jpg" alt="Ibn Sina Hospital Location Map">
+                </div>
+            </div>
+            <div class="timing-box"><p><strong>OPD:</strong> 24/7</p><p><strong>Emergency, Lab & Pharmacy:</strong> 24/7</p></div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 17: IBN SINA COLLEGE -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Ibn Sina College</h2>
+            <p class="page-subtitle">Nursing & Health Sciences</p>
+            <div class="divider"></div>
+            <div class="college-intro">
+                <p>Ibn Sina College of Nursing & Health Sciences is affiliated with the University of Kashmir and recognised by the Indian Nursing Council (INC). The college provides quality nursing education with a strong focus on clinical training, with its clinical facilities attached to Ibn Sina Hospital.</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card"><div class="info-label">Affiliation</div><div class="info-value">University of Kashmir</div></div>
+                <div class="info-card"><div class="info-label">Recognition</div><div class="info-value">Indian Nursing Council (INC)</div></div>
+                <div class="info-card"><div class="info-label">Clinical Training</div><div class="info-value">Ibn Sina Hospital</div></div>
+                <div class="info-card"><div class="info-label">Student Strength</div><div class="info-value">368 Students</div></div>
+            </div>
+            <div class="courses-title">Key Programmes</div>
+            <ul class="courses-list">
+                <li><strong>B.Sc Nursing</strong></li>
+                <li><strong>Post Basic B.Sc Nursing</strong></li>
+                <li><strong>B.Sc Operation Theatre Technology</strong></li>
+                <li><strong>B.Sc Medical Laboratory Technology</strong></li>
+                <li><strong>B.Sc Dialysis Technology</strong></li>
+                <li><strong>B.Sc Radio Imaging Technology</strong></li>
+            </ul>
+            <div class="note-box">
+                <strong>Parent Hospital:</strong> Ibn Sina Hospital serves as the dedicated clinical training hospital for students of the college, located on the same campus in Ompora, Budgam.
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 18: CAMPUS & INFRASTRUCTURE (SATELLITE IMAGE) -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Campus & Infrastructure</h2>
+            <p class="page-subtitle">58 Kanals of Land | 100 Beds</p>
+            <div class="divider"></div>
+            <div class="campus-layout">
+                <div class="satellite-frame">
+                    <img src="images/campus-satellite.jpg" alt="Ibn Sina Hospital Campus Satellite View">
+                </div>
+                <div class="campus-text">
+                    <p style="font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 15px;">Our 58-kanal campus in Ompora, Budgam, is designed to provide a healing environment with modern infrastructure. The facility houses a 100-bed hospital, advanced diagnostic centers, and the Ibn Sina College of Nursing & Health Sciences.</p>
+                    <div class="courses-title">Key Equipment</div>
+                    <div class="machinery-list">
+                        <span class="machine-tag">Dialysis Unit</span>
+                        <span class="machine-tag">Digital X-Ray</span>
+                        <span class="machine-tag">Ultrasonography</span>
+                        <span class="machine-tag">Endoscopy Suite</span>
+                        <span class="machine-tag">TMT Lab</span>
+                        <span class="machine-tag">Holter & ABPM</span>
+                        <span class="machine-tag">Modern OTs</span>
+                        <span class="machine-tag">24/7 Lab</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 19: FUTURE EXPANSION -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Future Clinical Expansion</h2>
+            <p class="page-subtitle">Building the Next Generation of Care</p>
+            <div class="divider"></div>
+            <p style="text-align: center; font-size: 0.95rem; color: var(--text-light); margin-bottom: 20px;">Planned expansion of specialised diagnostic, therapeutic, and renal-care capabilities.</p>
+            <div class="future-grid">
+                <div class="future-item"><div class="future-title">Cath Lab</div></div>
+                <div class="future-item"><div class="future-title">CT Scan</div></div>
+                <div class="future-item"><div class="future-title">MRI</div></div>
+                <div class="future-item"><div class="future-title">PET Scan</div></div>
+                <div class="future-item"><div class="future-title">Oncology (Cancer Care)</div></div>
+                <div class="future-item"><div class="future-title">Kidney Transplant</div></div>
+                <div class="future-item"><div class="future-title">Expanded Dialysis Unit</div></div>
+                <div class="future-item"><div class="future-title">Blood Bank</div></div>
+                <div class="future-item"><div class="future-title">Critical Ambulances</div></div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 20: HOSPITAL GALLERY -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Hospital Gallery</h2>
+            <p class="page-subtitle">Moments of Care & Healing</p>
+            <div class="divider"></div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/gallery-1.jpg" alt="Hospital Gallery 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-2.jpg" alt="Hospital Gallery 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-3.jpg" alt="Hospital Gallery 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-4.jpg" alt="Hospital Gallery 4">
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 21: HOSPITAL INTERIORS -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content">
+            <h2 class="page-title">Hospital Interiors</h2>
+            <p class="page-subtitle">World-Class Facilities</p>
+            <div class="divider"></div>
+            <div class="interior-grid">
+                <!-- Top Row -->
+                <div class="interior-item">
+                    <img src="images/interior-1.jpg" alt="Hospital Interior 1">
+                </div>
+                <div class="interior-item">
+                    <img src="images/interior-2.jpg" alt="Hospital Interior 2">
+                </div>
+                
+                <!-- Middle Wide Image -->
+                <div class="interior-item wide">
+                    <img src="images/interior-3.jpg" alt="Hospital Interior 3">
+                </div>
+                
+                <!-- Bottom Row -->
+                <div class="interior-item">
+                    <img src="images/interior-4.jpg" alt="Hospital Interior 4">
+                </div>
+                <div class="interior-item">
+                    <img src="images/interior-5.jpg" alt="Hospital Interior 5">
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+    <!-- PAGE 22: BACK COVER -->
+    <div class="page-wrapper">
+        <div class="top-border"></div>
+        <div class="page-content back-cover-content">
+            <div class="inner-border"></div>
+            <h1 class="back-title">Ibn Sina Hospital</h1>
+            <p class="back-subtitle">Ompora, Budgam</p>
+            <div class="back-divider"></div>
+            <div class="motto">"High Quality Facilities at Affordable Costs."</div>
+            <div class="back-contact">
+                <strong>Appointments & Reception:</strong><br>9622552553 / 9419023501<br><br>
+                <strong>Emergency:</strong> Open 24/7<br>
+                <strong>Location:</strong> Near Railway Station, Budgam
+            </div>
+            <div class="back-website">www.ibnsinahospital.in</div>
+        </div>
+        <div class="footer-bar"><p class="footer-text">[ Built in 2018 ]</p></div>
+    </div>
+
+</body>
+</html>
