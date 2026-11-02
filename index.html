@@ -75,10 +75,8 @@
         .leader-info h4 { font-size: 1.1rem; color: var(--forest-green); margin-bottom: 4px; font-weight: 700; }
         .leader-info p { font-size: 0.85rem; color: var(--text-light); line-height: 1.4; }
 
-        /* --- PAGE 5: MS MESSAGE --- */
-        .message-layout { display: flex; gap: 30px; flex-grow: 1; align-items: flex-start; }
-        .ms-photo { flex: 0 0 160px; height: 200px; border: 3px solid var(--gold); background-color: #e5e5e5; display: flex; justify-content: center; align-items: center; color: #888; font-size: 0.85rem; text-align: center; padding: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; flex-shrink: 0; }
-        .ms-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        /* --- PAGE 5: MS MESSAGE (NO PHOTO BOX) --- */
+        .message-layout { display: flex; flex-grow: 1; align-items: flex-start; }
         .ms-text { flex: 1; display: flex; flex-direction: column; }
         .ms-text p { font-size: 0.95rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 15px; text-align: justify; }
         .ms-signature { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--gold); width: 100%; flex-shrink: 0; }
@@ -227,7 +225,8 @@
             .interior-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 1fr); }
             .interior-item.wide { grid-column: span 1; }
         }
-                /* --- FIX FOR PRINTING TO PDF --- */
+
+        /* --- FIX FOR PRINTING TO PDF --- */
         @media print {
             body {
                 background-color: white;
@@ -244,7 +243,7 @@
                 margin: 0;
                 border: none;
             }
-            /* This prevents the browser from cutting elements in half */
+            /* Prevents the browser from cutting elements in half */
             .page-content, .dept-full-block, .support-block, .gallery-grid, .interior-grid {
                 page-break-inside: avoid;
                 break-inside: avoid;
@@ -269,7 +268,7 @@
             </div>
             <p class="cover-website">www.ibnsinahospital.in</p>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 2: ABOUT US -->
@@ -284,7 +283,7 @@
             <p class="about-text">Ibn Sina Hospital is based in Ompora, Budgam, and serves patients from Srinagar, Ganderbal, Pulwama, Shopian, Kulgam, across Jammu & Kashmir, and patients visiting from other parts of India. In addition to the hospital, we have an affiliated nursing college, strengthening our contribution to healthcare education.</p>
             <div class="quote-box">"High Quality Facilities at Affordable Costs."</div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 3: AT A GLANCE -->
@@ -306,7 +305,7 @@
             </div>
             <p style="font-size: 0.75rem; color: #888; margin-top: auto; text-align: center;">*NABH accreditation status and validity dates should be verified prior to final printing.</p>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 4: LEADERSHIP -->
@@ -329,10 +328,10 @@
                 <div class="leader-info"><h4>Dr. Ashraf Ahmad Malik</h4><p>Administrative Head<br>Manages admissions, discharges, records, and documentation.</p></div>
             </div>
         </div>
-         class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></</div>
     </div>
 
-    <!-- PAGE 5: MS MESSAGE -->
+    <!-- PAGE 5: MS MESSAGE (NO PHOTO BOX) -->
     <div class="page-wrapper">
         <div class="top-border"></div>
         <div class="page-content">
@@ -340,9 +339,6 @@
             <p class="page-subtitle">A Commitment to Excellence</p>
             <div class="divider"></div>
             <div class="message-layout">
-                <div class="ms-photo">
-                    <img src="images/ms-dr-ibrahim-makaya.jpg" alt="Dr. Ibrahim Makaya, Medical Superintendent">
-                </div>
                 <div class="ms-text">
                     <div>
                         <p>Welcome to Ibn Sina Hospital. Since our founding in 2018, we have strived to create a healthcare institution that the people of Budgam and beyond can trust implicitly. Our journey has been defined by a relentless commitment to clinical excellence, compassion, and accessibility.</p>
@@ -356,7 +352,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 6: DOCTORS PART 1 -->
@@ -381,7 +377,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 7: DOCTORS PART 2 -->
@@ -408,7 +404,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 8: DEPARTMENTS 1 -->
@@ -429,7 +425,7 @@
                 <div class="dept-doctors"><strong>Consultants:</strong> Dr. Zaffar Ali Wani, Dr. Irshad Ahmad Parray, Dr. Wasim</div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 9: DEPARTMENTS 2 -->
@@ -450,7 +446,7 @@
                 <div class="dept-doctors"><strong>Consultants:</strong> Dr. Shabir Mir, Dr. Shahnawaz Rasool, Dr. Muzzafar Bashir</div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 10: DEPARTMENTS 3 -->
@@ -471,7 +467,7 @@
                 <div class="dept-doctors"><strong>Consultants:</strong> Dr. Jaiparam Singh, Dr. Wasim Raja, Dr. Mohammad Yousuf Dar</div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 11: SERVICES -->
@@ -496,7 +492,7 @@
                 <div class="service-card"><div class="service-title">Ambulance</div><div class="service-desc">Emergency transport to and from the hospital.</div></div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 12: PM-JAY -->
@@ -522,7 +518,7 @@
             </ul>
             <div class="note-box"><strong>Important:</strong> Always carry your PM-JAY card / e-card and Aadhaar when you visit.</div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 13: INSURANCE -->
@@ -548,7 +544,7 @@
             </div>
             <div class="highlight-box"><strong>Need help with billing?</strong><br>Visit our reception or call us at <strong>9419023501</strong> for assistance.</div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 14: COMMUNITY -->
@@ -569,7 +565,7 @@
                 <div class="tip-card"><h4>Regular Checkups</h4><p>Don't wait for symptoms. Annual health screenings help detect issues early, when they are easiest to treat.</p></div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 15: QUALITY & ACCREDITATIONS -->
@@ -597,7 +593,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 16: CONTACT -->
@@ -620,7 +616,7 @@
             </div>
             <div class="timing-box"><p><strong>OPD:</strong> 24/7</p><p><strong>Emergency, Lab & Pharmacy:</strong> 24/7</p></div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 17: IBN SINA COLLEGE -->
@@ -637,7 +633,7 @@
                 <div class="info-card"><div class="info-label">Affiliation</div><div class="info-value">University of Kashmir</div></div>
                 <div class="info-card"><div class="info-label">Recognition</div><div class="info-value">Indian Nursing Council (INC)</div></div>
                 <div class="info-card"><div class="info-label">Clinical Training</div><div class="info-value">Ibn Sina Hospital</div></div>
-                <div class="info-card"><div class="info-label">Student Strength</div><div class="info-value">call to know</div></div>
+                <div class="info-card"><div class="info-label">Student Strength</div><div class="info-value">368 Students</div></div>
             </div>
             <div class="courses-title">Key Programmes</div>
             <ul class="courses-list">
@@ -652,7 +648,7 @@
                 <strong>Parent Hospital:</strong> Ibn Sina Hospital serves as the dedicated clinical training hospital for students of the college, located on the same campus in Ompora, Budgam.
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 18: CAMPUS & INFRASTRUCTURE (SATELLITE IMAGE) -->
@@ -682,7 +678,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 19: FUTURE EXPANSION -->
@@ -705,7 +701,7 @@
                 <div class="future-item"><div class="future-title">Critical Ambulances</div></div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 20: HOSPITAL GALLERY -->
@@ -730,7 +726,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 21: HOSPITAL INTERIORS -->
@@ -763,7 +759,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
     <!-- PAGE 22: BACK COVER -->
@@ -782,7 +778,7 @@
             </div>
             <div class="back-website">www.ibnsinahospital.in</div>
         </div>
-        <div class="footer-bar"><p class="footer-text">ibnsinahospital.in</p></div>
+        <div class="footer-bar"><p class="footer-text">www.ibnsinahospital.in</p></div>
     </div>
 
 </body>
